@@ -3,7 +3,8 @@ echo "Installing Homebrew packages..."
 brew install gifski \
     docker \
     gemini-cli \
-    node
+    node \
+    uv
 echo "✓ Homebrew package installation complete."
 
 echo "Installing Homebrew cask applications..."

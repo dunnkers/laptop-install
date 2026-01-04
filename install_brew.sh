@@ -4,7 +4,9 @@ brew install gifski \
     docker \
     gemini-cli \
     node \
-    uv
+    uv \
+    mas
+# ^ gifski CLI
 echo "✓ Homebrew package installation complete."
 
 echo "Installing Homebrew cask applications..."

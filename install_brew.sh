@@ -17,6 +17,8 @@ brew install --cask gcloud-cli \
     --cask spotify \
     --cask whatsapp \
     --cask github \
+    --cask hyperkey \
+    --cask rectangle \
     --cask drawio \
     --cask claude-code \
     --cask claude \
@@ -24,5 +26,4 @@ brew install --cask gcloud-cli \
     --cask db-browser-for-sqlite \
     --cask logi-options+ \
     --cask netnewswire
-    # --cask rectangle \
 echo "✓ Homebrew cask installation complete."

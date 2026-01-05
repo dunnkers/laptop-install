@@ -5,6 +5,7 @@ brew install gifski \
     gemini-cli \
     node \
     uv \
+    gh \
     mas
 # ^ gifski CLI
 echo "✓ Homebrew package installation complete."

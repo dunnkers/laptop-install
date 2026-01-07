@@ -25,6 +25,6 @@ brew install --cask gcloud-cli \
     --cask claude \
     --cask dbeaver-community \
     --cask db-browser-for-sqlite \
-    --cask logi-options+ \
-    --cask netnewswire
+    --cask netnewswire \
+    --cask linearmouse
 echo "✓ Homebrew cask installation complete."

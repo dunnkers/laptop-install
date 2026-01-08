@@ -17,5 +17,6 @@
 3. Run laptop install script:
 
   ```
-  sh ~/git/dunnkers/laptop-install/install.sh
+  cd ~/git/dunnkers/laptop-install
+  sh install.sh
   ```

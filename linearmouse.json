@@ -23,6 +23,9 @@
         ],
         "universalBackForward" : true
       },
+      "pointer" : {
+        "acceleration" : 3.0
+      },
       "if" : {
         "device" : {
           "category" : "mouse",

@@ -12,10 +12,9 @@ This is a macOS laptop setup automation repository that installs and configures 
 
 The main entry point is [install.sh](install.sh), which executes scripts in this order:
 
-1. [install_brew.sh](install_brew.sh) - Installs Homebrew packages and cask applications
-2. [install_proton.sh](install_proton.sh) - Optional interactive Proton suite installation
-3. [install_mas.sh](install_mas.sh) - Installs Mac App Store applications
-4. Configuration scripts for specific applications:
+1. [install_brew.sh](install_brew.sh) - Installs all Homebrew packages and cask applications in one consolidated command. Includes optional Proton suite (asks user once, saves preference).
+2. [install_mas.sh](install_mas.sh) - Installs Mac App Store applications
+3. Configuration scripts for specific applications:
    - [install_hotcorners.sh](install_hotcorners.sh)
    - [install_hyperkey.sh](install_hyperkey.sh)
    - [install_rectangle.sh](install_rectangle.sh)
@@ -41,6 +40,27 @@ Application configuration scripts follow this pattern:
 
 - [linearmouse.json](linearmouse.json): JSON configuration for LinearMouse that maps mouse buttons to macOS gestures. Copied to `~/.config/linearmouse/` during installation.
 
+### User Preferences System
+
+The repository includes a preferences management system ([lib/preferences.sh](lib/preferences.sh)) that stores user choices persistently in `~/.config/laptop-install/preferences`. This allows scripts to ask questions once and remember the answers for future runs.
+
+**Key functions:**
+- `get_preference "key" "default"` - Retrieves a stored preference value
+- `set_preference "key" "value"` - Stores a preference value
+- `has_preference "key"` - Checks if a preference exists
+- `ask_preference "key" "prompt" "default"` - Asks user for input only if preference not already set
+
+**Usage example:**
+```bash
+source "${SCRIPT_DIR}/lib/preferences.sh"
+install_proton=$(ask_preference "install_proton" "Install Proton suite? [y/N]:" "n")
+```
+
+To reset preferences and be prompted again, delete the preferences file:
+```bash
+rm ~/.config/laptop-install/preferences
+```
+
 ## Running the Installation
 
 Execute the main installation script:
@@ -57,9 +77,11 @@ sh install_rectangle.sh
 
 ## Adding New Applications
 
-1. **Homebrew packages**: Add to the `brew install` command in [install_brew.sh](install_brew.sh)
-2. **Homebrew casks**: Add to the `brew install --cask` command in [install_brew.sh](install_brew.sh)
+1. **Homebrew packages**: Add to the `packages` array in [install_brew.sh](install_brew.sh)
+2. **Homebrew casks**: Add to the `casks` array in [install_brew.sh](install_brew.sh)
 3. **Mac App Store apps**: Add to the `apps` array in [install_mas.sh](install_mas.sh) with format `"<app_id> <app_name>"`
+
+All Homebrew packages and casks are installed in a single consolidated command for efficiency.
 
 ## Adding New Configuration Scripts
 

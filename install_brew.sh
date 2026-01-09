@@ -1,30 +1,64 @@
+#!/bin/bash
 
-echo "Installing Homebrew packages..."
-brew install gifski \
-    docker \
-    gemini-cli \
-    node \
-    uv \
-    gh \
+# Source preferences library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/lib/preferences.sh"
+
+# Ask about Proton suite installation (only once)
+install_proton=$(ask_preference "install_proton" "Install Proton suite (Pass, Mail, Drive, VPN)? [y/N]:" "n")
+
+# Build list of packages to install
+packages=(
+    gifski
+    docker
+    gemini-cli
+    node
+    uv
+    gh
     mas
-# ^ gifski CLI
+)
+
+casks=(
+    gcloud-cli
+    anki
+    visual-studio-code
+    maccy
+    spotify
+    whatsapp
+    github
+    hyperkey
+    rectangle
+    drawio
+    claude-code
+    claude
+    dbeaver-community
+    db-browser-for-sqlite
+    netnewswire
+    linearmouse
+)
+
+# Add Proton suite if requested
+case "$install_proton" in
+    [yY][eE][sS]|[yY])
+        echo "Including Proton suite in installation..."
+        casks+=(
+            proton-pass
+            proton-mail
+            proton-drive
+            protonvpn
+        )
+        ;;
+    *)
+        echo "Skipping Proton suite."
+        ;;
+esac
+
+# Install all packages in one command
+echo "Installing Homebrew packages..."
+brew install "${packages[@]}"
 echo "✓ Homebrew package installation complete."
 
+# Install all casks in one command
 echo "Installing Homebrew cask applications..."
-brew install --cask gcloud-cli \
-    --cask anki \
-    --cask visual-studio-code \
-    --cask maccy \
-    --cask spotify \
-    --cask whatsapp \
-    --cask github \
-    --cask hyperkey \
-    --cask rectangle \
-    --cask drawio \
-    --cask claude-code \
-    --cask claude \
-    --cask dbeaver-community \
-    --cask db-browser-for-sqlite \
-    --cask netnewswire \
-    --cask linearmouse
+brew install $(printf -- '--cask %s ' "${casks[@]}")
 echo "✓ Homebrew cask installation complete."

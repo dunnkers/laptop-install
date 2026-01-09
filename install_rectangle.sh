@@ -1,5 +1,8 @@
 echo "Configuring Rectangle shortcuts..."
 
+# Enable launch on login
+defaults write com.knollsoft.Rectangle launchOnLogin -bool true
+
 # Basic Halves (Arrows)
 defaults write com.knollsoft.Rectangle leftHalf -dict keyCode 123 modifierFlags 1835008
 defaults write com.knollsoft.Rectangle rightHalf -dict keyCode 124 modifierFlags 1835008

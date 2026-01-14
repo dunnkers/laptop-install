@@ -35,6 +35,7 @@ casks=(
     db-browser-for-sqlite
     netnewswire
     linearmouse
+    obsidian
 )
 
 # Add Proton suite if requested

@@ -26,6 +26,7 @@ casks=(
     spotify
     whatsapp
     github
+    google-chrome
     hyperkey
     fastrepl/hyprnote/hyprnote@nightly
     rectangle

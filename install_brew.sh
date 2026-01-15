@@ -27,13 +27,16 @@ casks=(
     whatsapp
     github
     hyperkey
+    fastrepl/hyprnote/hyprnote@nightly
     rectangle
     drawio
     claude-code
     claude
+    craft
     dbeaver-community
     db-browser-for-sqlite
     netnewswire
+    linear-linear
     linearmouse
     obsidian
 )

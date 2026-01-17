@@ -5,3 +5,4 @@ sh install_hotcorners.sh
 sh install_hyperkey.sh
 sh install_rectangle.sh
 sh install_linearmouse.sh
+sh install_cleanup.sh

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.laptop-install.cleanup</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>INSTALL_DIR/lib/cleanup_folders.sh</string>
+    </array>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>2</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>HOME/.config/laptop-install/cleanup-stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>HOME/.config/laptop-install/cleanup-stderr.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>CLEANUP_AGE_HOURS</key>
+        <string>CLEANUP_AGE_HOURS_VALUE</string>
+        <key>CLEANUP_DOWNLOADS</key>
+        <string>CLEANUP_DOWNLOADS_VALUE</string>
+        <key>CLEANUP_DESKTOP</key>
+        <string>CLEANUP_DESKTOP_VALUE</string>
+    </dict>
+</dict>
+</plist>

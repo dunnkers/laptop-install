@@ -40,6 +40,7 @@ casks=(
     linear-linear
     linearmouse
     obsidian
+    docker-desktop
 )
 
 # Add Proton suite if requested

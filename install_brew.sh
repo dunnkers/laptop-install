@@ -10,7 +10,6 @@ install_proton=$(ask_preference "install_proton" "Install Proton suite (Pass, Ma
 # Build list of packages to install
 packages=(
     gifski
-    docker
     gemini-cli
     node
     uv

@@ -39,6 +39,9 @@ defaults write com.knollsoft.Rectangle lastTwoThirds -dict keyCode 2 modifierFla
 defaults write com.knollsoft.Rectangle nextDisplay -dict keyCode 124 modifierFlags 1966080
 defaults write com.knollsoft.Rectangle previousDisplay -dict keyCode 123 modifierFlags 1966080
 
+# Stage Manager settings
+defaults write com.knollsoft.Rectangle stageSize -int 5
+
 # Restart Rectangle to apply changes
 killall Rectangle && open -a Rectangle
 

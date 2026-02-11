@@ -16,6 +16,9 @@ packages=(
     gh
     mas
     glab
+    hashicorp/tap/terraform
+    tflint
+    pre-commit
 )
 
 casks=(
@@ -58,6 +61,9 @@ case "$install_proton" in
         echo "Skipping Proton suite."
         ;;
 esac
+
+# Add third-party taps
+brew tap hashicorp/tap
 
 # Install all packages in one command
 echo "Installing Homebrew packages..."

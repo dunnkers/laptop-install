@@ -15,6 +15,7 @@ packages=(
     uv
     gh
     mas
+    glab
 )
 
 casks=(

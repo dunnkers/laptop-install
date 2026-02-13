@@ -19,6 +19,7 @@ packages=(
     hashicorp/tap/terraform
     tflint
     pre-commit
+    ffmpeg
 )
 
 casks=(

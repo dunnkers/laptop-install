@@ -37,6 +37,7 @@ casks=(
     claude-code
     claude
     craft
+    notion
     dbeaver-community
     db-browser-for-sqlite
     netnewswire
@@ -53,6 +54,7 @@ case "$install_proton" in
         casks+=(
             proton-pass
             proton-mail
+            proton-mail-bridge
             proton-drive
             protonvpn
         )

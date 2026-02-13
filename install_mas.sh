@@ -18,3 +18,6 @@ done
 
 echo "Installing apps…"
 mas install "${ids[@]}"
+
+echo "Updating all Mac App Store apps..."
+mas upgrade

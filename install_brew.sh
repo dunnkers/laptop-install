@@ -45,6 +45,7 @@ casks=(
     linear-linear
     linearmouse
     obsidian
+    ollama-app
     docker-desktop
 )
 

@@ -1,6 +1,6 @@
 apps=(
     "1559269364 Notion Web Clipper"
-    "1481853033 Strongbox Pro"
+    # "1481853033 Strongbox Pro"
     "1609960918 Jomo - Screen Time Blocker"
     "408981434 iMovie"
     "1365531024 1Blocker - Ad Blocker"
@@ -19,5 +19,10 @@ done
 echo "Installing apps…"
 mas install "${ids[@]}"
 
-echo "Updating all Mac App Store apps..."
-mas upgrade
+# upgrade every app in apps
+echo "Upgrading apps…"
+for app in "${apps[@]}"; do
+    id="${app%% *}"
+    name="${app#* }"
+    mas upgrade "$id"
+done

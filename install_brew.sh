@@ -44,6 +44,7 @@ casks=(
     netnewswire
     linear-linear
     linearmouse
+    mos
     obsidian
     ollama-app
     docker-desktop

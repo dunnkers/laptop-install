@@ -3,6 +3,11 @@
   "schemes" : [
     {
       "buttons" : {
+        "universalBackForward" : true
+      }
+    },
+    {
+      "buttons" : {
         "mappings" : [
           {
             "action" : "appExpose",

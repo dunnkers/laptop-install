@@ -20,6 +20,7 @@ packages=(
     tflint
     pre-commit
     ffmpeg
+    colima
 )
 
 casks=(

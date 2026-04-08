@@ -21,6 +21,7 @@ packages=(
     pre-commit
     ffmpeg
     colima
+    tree
 )
 
 casks=(

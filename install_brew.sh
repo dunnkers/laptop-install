@@ -19,9 +19,11 @@ packages=(
     hashicorp/tap/terraform
     tflint
     pre-commit
+    git-filter-repo
     ffmpeg
     colima
     tree
+    llmfit
 )
 
 casks=(

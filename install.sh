@@ -9,4 +9,3 @@ sh install_linearmouse.sh
 sh install_mos.sh
 sh install_ohmyzsh.sh
 sh install_git_aliases.sh
-sh install_cleanup.sh

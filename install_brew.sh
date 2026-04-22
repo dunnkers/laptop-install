@@ -24,6 +24,7 @@ packages=(
     colima
     tree
     llmfit
+    anomalyco/tap/opencode
 )
 
 casks=(
@@ -74,6 +75,7 @@ esac
 
 # Add third-party taps
 brew tap hashicorp/tap
+brew tap anomalyco/tap
 
 # Install all packages in one command
 echo "Installing Homebrew packages..."

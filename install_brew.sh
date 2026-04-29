@@ -54,6 +54,7 @@ casks=(
     ollama-app
     orion
     docker-desktop
+    screen-studio
 )
 
 # Add Proton suite if requested

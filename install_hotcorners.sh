@@ -6,10 +6,10 @@ defaults write com.apple.dock wvous-tl-corner -int 11
 defaults write com.apple.dock wvous-tl-modifier -int 0
 echo "✓ Top Left Hot Corner set to Launchpad."
 
-# Bottom Left: Put Display to Sleep
-defaults write com.apple.dock wvous-bl-corner -int 10
+# Bottom Left: Lock Screen
+defaults write com.apple.dock wvous-bl-corner -int 13
 defaults write com.apple.dock wvous-bl-modifier -int 0
-echo "✓ Bottom Left Hot Corner set to Put Display to Sleep."
+echo "✓ Bottom Left Hot Corner set to Lock Screen."
 
 # Top Right: Notification Centre
 defaults write com.apple.dock wvous-tr-corner -int 12

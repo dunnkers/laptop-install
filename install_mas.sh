@@ -6,6 +6,7 @@ apps=(
     "1365531024 1Blocker - Ad Blocker"
     "1351639930 Gifski"
     "6502835663 Proton Pass for Safari"
+    "937984704 Amphetamine"
 )
 
 installed=$(mas list 2>/dev/null)

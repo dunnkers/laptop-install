@@ -1,5 +1,4 @@
 apps=(
-    "1559269364 Notion Web Clipper"
     # "1481853033 Strongbox Pro"
     "1609960918 Jomo - Screen Time Blocker"
     "408981434 iMovie"
@@ -7,6 +6,7 @@ apps=(
     "1351639930 Gifski"
     "6502835663 Proton Pass for Safari"
     "937984704 Amphetamine"
+    "6471380298 StopTheMadness Pro"
 )
 
 installed=$(mas list 2>/dev/null)

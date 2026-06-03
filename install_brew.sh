@@ -43,7 +43,6 @@ casks=(
     claude-code
     claude
     craft
-    notion
     dbeaver-community
     db-browser-for-sqlite
     netnewswire

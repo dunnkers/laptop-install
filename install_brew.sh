@@ -50,7 +50,6 @@ casks=(
     mos
     obsidian
     ollama-app
-    orion
     docker-desktop
     screen-studio
 )

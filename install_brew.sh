@@ -37,7 +37,6 @@ casks=(
     github
     google-chrome
     hyperkey
-    # hyprnote@nightly  # Removed: broken cask definition in fastrepl/hyprnote tap - install manually from https://hyprnote.com
     rectangle
     drawio
     claude-code

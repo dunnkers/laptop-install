@@ -16,6 +16,6 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 
 # Restart LinearMouse to apply the configuration
 killall LinearMouse 2>/dev/null || true
-open -a LinearMouse
+open -a LinearMouse 2>/dev/null || true
 
 echo "✓ LinearMouse configuration complete."

@@ -6,4 +6,4 @@ defaults write com.caldis.Mos duration -float 2.00
 
 # Restart Mos to apply changes
 killall Mos 2>/dev/null
-open -a Mos
+open -a Mos 2>/dev/null || true

@@ -43,6 +43,6 @@ defaults write com.knollsoft.Rectangle previousDisplay -dict keyCode 123 modifie
 defaults write com.knollsoft.Rectangle stageSize -int 5
 
 # Restart Rectangle to apply changes
-killall Rectangle && open -a Rectangle
+killall Rectangle 2>/dev/null; open -a Rectangle 2>/dev/null || true
 
 echo "Rectangle has been configured."

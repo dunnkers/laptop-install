@@ -8,6 +8,6 @@ osascript -e 'tell application "System Events" to make login item at end with pr
 
 # Restart Maccy to apply changes
 killall Maccy 2>/dev/null || true
-open -a Maccy
+open -a Maccy 2>/dev/null || true
 
 echo "✓ Maccy has been configured."

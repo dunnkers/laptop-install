@@ -83,6 +83,15 @@ sh install_rectangle.sh
 
 All Homebrew packages and casks are installed in a single consolidated command for efficiency.
 
+### Prefer Official Sources
+
+Always install from official sources. When adding a new package or cask:
+- Prefer the official Homebrew core formulae (`homebrew/core`) or cask tap (`homebrew/cask`) over third-party taps.
+- If a third-party tap is required, verify it is maintained by the official vendor (e.g., `hashicorp/tap/terraform` is published by HashiCorp).
+- Avoid community-maintained taps or forks when an official distribution exists.
+- For casks, confirm the cask points to the vendor's official download URL (`brew info --cask <name>` shows the source).
+- Prefer `mas install` (Mac App Store) for apps that are available there, as they are sandboxed and Apple-verified.
+
 ## Adding New Configuration Scripts
 
 1. Create a new `install_<appname>.sh` script following the existing pattern

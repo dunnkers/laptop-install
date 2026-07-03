@@ -25,6 +25,7 @@ packages=(
     tree
     llmfit
     anomalyco/tap/opencode
+    himalaya
 )
 
 casks=(
@@ -58,6 +59,9 @@ casks=(
 case "$install_proton" in
     [yY][eE][sS]|[yY])
         echo "Including Proton suite in installation..."
+        packages+=(
+            protonpass/tap/pass-cli
+        )
         casks+=(
             proton-pass
             proton-mail
@@ -74,6 +78,9 @@ esac
 # Add third-party taps
 brew tap hashicorp/tap
 brew tap anomalyco/tap
+if [[ "$install_proton" =~ ^[yY] ]]; then
+    brew tap protonpass/tap
+fi
 
 # Install all packages in one command
 echo "Installing Homebrew packages..."

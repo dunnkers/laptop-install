@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Run non-interactively: Homebrew 6.0+ asks for confirmation before installing
+# ("ask mode") by default. HOMEBREW_NO_ASK disables that prompt.
+export HOMEBREW_NO_ASK=1
+
 # Source preferences library
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/lib/preferences.sh"

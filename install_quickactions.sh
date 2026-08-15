@@ -1,17 +1,21 @@
 
 echo "Setting up Finder Quick Actions..."
 
-# Installs a "Prepend Date" Quick Action that prepends "YYYY-MM-DD " to the
-# names of the selected files/folders. Appears in Finder under the right-click
-# menu > Quick Actions.
+PROTON_ARCHIVE_ROOT="${HOME}/Library/CloudStorage/ProtonDrive-contact@jeroenoverschie.nl-folder"
 
-SERVICE_NAME="Prepend Date"
-SERVICE_DIR="${HOME}/Library/Services/${SERVICE_NAME}.workflow/Contents"
+# Installs a Finder "Run Shell Script" Quick Action. Appears in Finder under
+# the right-click menu > Quick Actions, for files/folders.
+#
+# Usage: install_quick_action_service "Service Name" "$SHELL_SCRIPT"
+install_quick_action_service() {
+	local SERVICE_NAME="$1"
+	local COMMAND_STRING="$2"
+	local SERVICE_DIR="${HOME}/Library/Services/${SERVICE_NAME}.workflow/Contents"
 
-mkdir -p "${SERVICE_DIR}"
+	mkdir -p "${SERVICE_DIR}"
 
-# Info.plist: registers the workflow as a Finder service for files/folders.
-cat > "${SERVICE_DIR}/Info.plist" <<'PLIST'
+	# Info.plist: registers the workflow as a Finder service for files/folders.
+	cat > "${SERVICE_DIR}/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -22,7 +26,7 @@ cat > "${SERVICE_DIR}/Info.plist" <<'PLIST'
 			<key>NSMenuItem</key>
 			<dict>
 				<key>default</key>
-				<string>Prepend Date</string>
+				<string>${SERVICE_NAME}</string>
 			</dict>
 			<key>NSMessage</key>
 			<string>runWorkflowAsService</string>
@@ -41,21 +45,8 @@ cat > "${SERVICE_DIR}/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
-# The shell script the Quick Action runs. Input items are passed as arguments.
-read -r -d '' COMMAND_STRING <<'SCRIPT' || true
-for f in "$@"; do
-  dir=$(dirname "$f")
-  base=$(basename "$f")
-  # Skip items already prefixed with a YYYY-MM-DD date
-  if [[ "$base" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}\  ]]; then
-    continue
-  fi
-  mv -n "$f" "$dir/$(date +%Y-%m-%d) $base"
-done
-SCRIPT
-
-# document.wflow: the Automator workflow. {{COMMAND_STRING}} is substituted below.
-cat > "${SERVICE_DIR}/document.wflow" <<'WFLOW'
+	# document.wflow: the Automator workflow. {{COMMAND_STRING}} is substituted below.
+	cat > "${SERVICE_DIR}/document.wflow" <<'WFLOW'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -185,9 +176,10 @@ cat > "${SERVICE_DIR}/document.wflow" <<'WFLOW'
 </plist>
 WFLOW
 
-# Substitute the command string (XML-escape & < >) and fresh UUIDs.
-ESCAPED=$(printf '%s' "${COMMAND_STRING}" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g')
-python3 - "$SERVICE_DIR/document.wflow" <<PYEOF
+	# Substitute the command string (XML-escape & < >) and fresh UUIDs.
+	local ESCAPED
+	ESCAPED=$(printf '%s' "${COMMAND_STRING}" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g')
+	python3 - "$SERVICE_DIR/document.wflow" <<PYEOF
 import sys
 path = sys.argv[1]
 with open(path) as fh:
@@ -201,8 +193,41 @@ with open(path, "w") as fh:
     fh.write(data)
 PYEOF
 
-# Refresh the Services menu so the new Quick Action shows up.
+	echo "✓ '${SERVICE_NAME}' Quick Action installed."
+}
+
+# "Prepend Date": prepends the file's modified date "YYYY-MM-DD " to its name.
+read -r -d '' PREPEND_DATE_SCRIPT <<'SCRIPT' || true
+for f in "$@"; do
+  dir=$(dirname "$f")
+  base=$(basename "$f")
+  # Skip items already prefixed with a YYYY-MM-DD date
+  if [[ "$base" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}\  ]]; then
+    continue
+  fi
+  modified_date=$(stat -f "%Sm" -t "%Y-%m-%d" "$f")
+  mv -n "$f" "$dir/${modified_date} $base"
+done
+SCRIPT
+install_quick_action_service "Prepend Date" "${PREPEND_DATE_SCRIPT}"
+
+# "Move to Archive": moves the selected file/folder into the Proton Drive
+# archive year folder matching its modified date, e.g. .../2026 for a file
+# last modified in 2026.
+read -r -d '' MOVE_TO_ARCHIVE_SCRIPT <<SCRIPT || true
+for f in "\$@"; do
+  base=\$(basename "\$f")
+  year=\$(stat -f "%Sm" -t "%Y" "\$f")
+  dest="${PROTON_ARCHIVE_ROOT}/\${year}"
+  if [[ ! -d "\$dest" ]]; then
+    continue
+  fi
+  mv -n "\$f" "\$dest/\$base"
+done
+SCRIPT
+install_quick_action_service "Move to Archive" "${MOVE_TO_ARCHIVE_SCRIPT}"
+
+# Refresh the Services menu so the new Quick Actions show up.
 /System/Library/CoreServices/pbs -flush 2>/dev/null || true
 
-echo "✓ '${SERVICE_NAME}' Quick Action installed."
-echo "  Right-click a file/folder in Finder > Quick Actions > Prepend Date."
+echo "  Right-click a file/folder in Finder > Quick Actions."

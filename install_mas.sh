@@ -7,6 +7,7 @@ apps=(
     "6502835663 Proton Pass for Safari"
     "937984704 Amphetamine"
     "6471380298 StopTheMadness Pro"
+    "302584613 Amazon Kindle"
 )
 
 installed=$(mas list 2>/dev/null)

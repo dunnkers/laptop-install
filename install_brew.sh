@@ -35,6 +35,7 @@ packages=(
 casks=(
     gcloud-cli
     anki
+    openmtp
     visual-studio-code
     maccy
     # spotify  # Removed: "Apple cannot verify that spotify is free of malware that may harm your Mac" - install manually from https://www.spotify.com/download/mac/

@@ -72,7 +72,7 @@ case "$install_proton" in
             proton-mail
             proton-mail-bridge
             proton-drive
-            protonvpn
+            dunnkers/pinned/protonvpn-6-5-1
         )
         ;;
     *)
@@ -85,6 +85,12 @@ brew tap hashicorp/tap
 brew tap anomalyco/tap
 if [[ "$install_proton" =~ ^[yY] ]]; then
     brew tap protonpass/tap
+    # Proton VPN is pinned to 6.5.1: 6.5.2 fails to enable its system extension
+    # on macOS 27 ("Cannot enable System Extension" / "VPN Protocol Not Supported").
+    # Remove the pin (and casks/protonvpn-6-5-1.rb) once a fixed release ships.
+    brew tap-new --no-git dunnkers/pinned >/dev/null 2>&1 || true
+    mkdir -p "$(brew --repository dunnkers/pinned)/Casks"
+    cp "${SCRIPT_DIR}/casks/protonvpn-6-5-1.rb" "$(brew --repository dunnkers/pinned)/Casks/"
 fi
 
 # Install all packages in one command

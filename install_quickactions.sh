@@ -1,7 +1,7 @@
 
 echo "Setting up Finder Quick Actions..."
 
-PROTON_ARCHIVE_ROOT="${HOME}/Library/CloudStorage/ProtonDrive-contact@jeroenoverschie.nl-folder"
+ICLOUD_ARCHIVE_ROOT="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/Archive"
 
 # Installs a Finder "Run Shell Script" Quick Action. Appears in Finder under
 # the right-click menu > Quick Actions, for files/folders.
@@ -196,36 +196,30 @@ PYEOF
 	echo "✓ '${SERVICE_NAME}' Quick Action installed."
 }
 
-# "Prepend Date": prepends the file's modified date "YYYY-MM-DD " to its name.
-read -r -d '' PREPEND_DATE_SCRIPT <<'SCRIPT' || true
-for f in "$@"; do
-  dir=$(dirname "$f")
-  base=$(basename "$f")
-  # Skip items already prefixed with a YYYY-MM-DD date
-  if [[ "$base" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}\  ]]; then
-    continue
-  fi
-  modified_date=$(stat -f "%Sm" -t "%Y-%m-%d" "$f")
-  mv -n "$f" "$dir/${modified_date} $base"
-done
-SCRIPT
-install_quick_action_service "Prepend Date" "${PREPEND_DATE_SCRIPT}"
-
-# "Move to Archive": moves the selected file/folder into the Proton Drive
-# archive year folder matching its modified date, e.g. .../2026 for a file
-# last modified in 2026.
-read -r -d '' MOVE_TO_ARCHIVE_SCRIPT <<SCRIPT || true
+# "Archive": prepends the file's modified date "YYYY-MM-DD " to its name (unless
+# it already starts with one), then moves it into the iCloud Drive Archive year
+# folder matching that date, e.g. .../Archive/2026.
+read -r -d '' ARCHIVE_SCRIPT <<SCRIPT || true
 for f in "\$@"; do
   base=\$(basename "\$f")
-  year=\$(stat -f "%Sm" -t "%Y" "\$f")
-  dest="${PROTON_ARCHIVE_ROOT}/\${year}"
+  if [[ "\$base" =~ ^([0-9]{4})-[0-9]{2}-[0-9]{2}\  ]]; then
+    year="\${match[1]}"
+  else
+    modified_date=\$(stat -f "%Sm" -t "%Y-%m-%d" "\$f")
+    year="\${modified_date:0:4}"
+    base="\${modified_date} \$base"
+  fi
+  dest="${ICLOUD_ARCHIVE_ROOT}/\${year}"
   if [[ ! -d "\$dest" ]]; then
     continue
   fi
   mv -n "\$f" "\$dest/\$base"
 done
 SCRIPT
-install_quick_action_service "Move to Archive" "${MOVE_TO_ARCHIVE_SCRIPT}"
+install_quick_action_service "Archive" "${ARCHIVE_SCRIPT}"
+
+# Remove the superseded Quick Actions.
+rm -rf "${HOME}/Library/Services/Prepend Date.workflow" "${HOME}/Library/Services/Move to Archive.workflow"
 
 # Refresh the Services menu so the new Quick Actions show up.
 /System/Library/CoreServices/pbs -flush 2>/dev/null || true

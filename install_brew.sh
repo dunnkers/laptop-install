@@ -31,6 +31,10 @@ packages=(
     anomalyco/tap/opencode
     himalaya
     cloudflare-wrangler
+    rust
+    rust-analyzer
+    cmake
+    pkgconf
 )
 
 casks=(

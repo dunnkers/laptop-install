@@ -30,6 +30,7 @@ packages=(
     llmfit
     anomalyco/tap/opencode
     himalaya
+    cloudflare-wrangler
 )
 
 casks=(

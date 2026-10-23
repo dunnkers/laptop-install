@@ -13,6 +13,7 @@ This is a macOS laptop setup automation repository that installs and configures 
 The main entry point is [install.sh](install.sh), which executes scripts in this order:
 
 1. [install_brew.sh](install_brew.sh) - Installs all Homebrew packages and cask applications in one consolidated command. Always includes Proton VPN (pinned) and Proton Pass.
+   - [install_cf.sh](install_cf.sh) - Installs the Cloudflare CLI `cf` via npm (needs node from the brew step)
 2. [install_mas.sh](install_mas.sh) - Installs Mac App Store applications
 3. Configuration scripts for specific applications:
    - [install_hotcorners.sh](install_hotcorners.sh)
@@ -90,6 +91,8 @@ Always install from official sources. When adding a new package or cask:
 - If a third-party tap is required, verify it is maintained by the official vendor (e.g., `hashicorp/tap/terraform` is published by HashiCorp).
 - Avoid community-maintained taps or forks when an official distribution exists.
 - For casks, confirm the cask points to the vendor's official download URL (`brew info --cask <name>` shows the source).
+- Cloudflare's CLI (Wrangler) is installed from the official `cloudflare-wrangler` formula in `homebrew/core`, not via npm or a third-party tap.
+- The new Cloudflare CLI `cf` (beta, https://developers.cloudflare.com/cf/) is installed via `npm install --global cf`, the official method (published by Cloudflare, repo `cloudflare/cf`). Do not use `brew install cf`: that is the unrelated Cloud Foundry CLI.
 - Prefer `mas install` (Mac App Store) for apps that are available there, as they are sandboxed and Apple-verified.
 
 ## Adding New Configuration Scripts

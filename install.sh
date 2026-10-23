@@ -17,6 +17,7 @@ else
 fi
 
 sh install_brew.sh
+sh install_cf.sh
 sh install_mas.sh
 sh install_dock.sh
 sh install_hotcorners.sh

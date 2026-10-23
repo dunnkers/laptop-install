@@ -4,12 +4,7 @@
 # ("ask mode") by default. HOMEBREW_NO_ASK disables that prompt.
 export HOMEBREW_NO_ASK=1
 
-# Source preferences library
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/lib/preferences.sh"
-
-# Ask about Proton suite installation (only once)
-install_proton=$(ask_preference "install_proton" "Install Proton suite (Pass, Mail, Drive, VPN)? [y/N]:" "n")
 
 # Build list of packages to install
 packages=(
@@ -35,6 +30,7 @@ packages=(
     rust-analyzer
     cmake
     pkgconf
+    protonpass/tap/pass-cli
 )
 
 casks=(
@@ -63,40 +59,20 @@ casks=(
     ollama-app
     docker-desktop
     screen-studio
+    proton-pass
+    dunnkers/pinned/protonvpn-6-5-1
 )
-
-# Add Proton suite if requested
-case "$install_proton" in
-    [yY][eE][sS]|[yY])
-        echo "Including Proton suite in installation..."
-        packages+=(
-            protonpass/tap/pass-cli
-        )
-        casks+=(
-            proton-pass
-            proton-mail
-            proton-mail-bridge
-            proton-drive
-            dunnkers/pinned/protonvpn-6-5-1
-        )
-        ;;
-    *)
-        echo "Skipping Proton suite."
-        ;;
-esac
 
 # Add third-party taps
 brew tap hashicorp/tap
 brew tap anomalyco/tap
-if [[ "$install_proton" =~ ^[yY] ]]; then
-    brew tap protonpass/tap
-    # Proton VPN is pinned to 6.5.1: 6.5.2 fails to enable its system extension
-    # on macOS 27 ("Cannot enable System Extension" / "VPN Protocol Not Supported").
-    # Remove the pin (and casks/protonvpn-6-5-1.rb) once a fixed release ships.
-    brew tap-new --no-git dunnkers/pinned >/dev/null 2>&1 || true
-    mkdir -p "$(brew --repository dunnkers/pinned)/Casks"
-    cp "${SCRIPT_DIR}/casks/protonvpn-6-5-1.rb" "$(brew --repository dunnkers/pinned)/Casks/"
-fi
+brew tap protonpass/tap
+# Proton VPN is pinned to 6.5.1: 6.5.2 fails to enable its system extension
+# on macOS 27 ("Cannot enable System Extension" / "VPN Protocol Not Supported").
+# Remove the pin (and casks/protonvpn-6-5-1.rb) once a fixed release ships.
+brew tap-new --no-git dunnkers/pinned >/dev/null 2>&1 || true
+mkdir -p "$(brew --repository dunnkers/pinned)/Casks"
+cp "${SCRIPT_DIR}/casks/protonvpn-6-5-1.rb" "$(brew --repository dunnkers/pinned)/Casks/"
 
 # Install all packages in one command
 echo "Installing Homebrew packages..."

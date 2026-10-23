@@ -12,7 +12,7 @@ This is a macOS laptop setup automation repository that installs and configures 
 
 The main entry point is [install.sh](install.sh), which executes scripts in this order:
 
-1. [install_brew.sh](install_brew.sh) - Installs all Homebrew packages and cask applications in one consolidated command. Includes optional Proton suite (asks user once, saves preference).
+1. [install_brew.sh](install_brew.sh) - Installs all Homebrew packages and cask applications in one consolidated command. Always includes Proton VPN (pinned) and Proton Pass.
 2. [install_mas.sh](install_mas.sh) - Installs Mac App Store applications
 3. Configuration scripts for specific applications:
    - [install_hotcorners.sh](install_hotcorners.sh)

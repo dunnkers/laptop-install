@@ -15,6 +15,7 @@ The main entry point is [install.sh](install.sh), which executes scripts in this
 1. [install_brew.sh](install_brew.sh) - Installs all Homebrew packages and cask applications in one consolidated command. Always includes Proton VPN (pinned) and Proton Pass.
    - [install_cf.sh](install_cf.sh) - Installs the Cloudflare CLI `cf` via npm (needs node from the brew step)
 2. [install_mas.sh](install_mas.sh) - Installs Mac App Store applications
+   - [install_talat.sh](install_talat.sh) - Installs talat from the official DMG (https://talat.app/download/mac); not on Homebrew or the App Store, Apple Silicon only
 3. Configuration scripts for specific applications:
    - [install_hotcorners.sh](install_hotcorners.sh)
    - [install_hyperkey.sh](install_hyperkey.sh)

@@ -14,6 +14,14 @@ fi
 # brew services doesn't install a kernel automatically
 container system kernel set --recommended 2>/dev/null || true
 
+# mlx-lm: Orchard's AI Models section expects ~/.local/bin/mlx_lm.server
+# (https://orchard.andon.dev/ai.html); uv comes from install_brew.sh
+if [ -x "$HOME/.local/bin/mlx_lm.server" ]; then
+    echo "mlx-lm already installed."
+else
+    uv tool install mlx-lm
+fi
+
 # Orchard: launch at login (skip if already a login item), and start it now
 if ! osascript -e 'tell application "System Events" to get the name of every login item' 2>/dev/null | grep -q "Orchard"; then
     osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Orchard.app", hidden:false, name:"Orchard"}' 2>/dev/null || true

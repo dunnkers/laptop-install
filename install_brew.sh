@@ -31,6 +31,7 @@ packages=(
     cmake
     pkgconf
     protonpass/tap/pass-cli
+    container
 )
 
 casks=(
@@ -61,6 +62,7 @@ casks=(
     screen-studio
     proton-pass
     dunnkers/pinned/protonvpn-6-5-1
+    orchard
 )
 
 # Add third-party taps

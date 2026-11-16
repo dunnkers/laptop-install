@@ -4,10 +4,10 @@ apps=(
     "408981434 iMovie"
     "1365531024 1Blocker - Ad Blocker"
     "1351639930 Gifski"
-    "6502835663 Proton Pass for Safari"
     "937984704 Amphetamine"
     "6471380298 StopTheMadness Pro"
     "302584613 Amazon Kindle"
+    "6475835429 SimpleLogin for Safari"
 )
 
 installed=$(mas list 2>/dev/null)

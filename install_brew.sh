@@ -30,7 +30,6 @@ packages=(
     rust-analyzer
     cmake
     pkgconf
-    protonpass/tap/pass-cli
     container
 )
 
@@ -58,17 +57,17 @@ casks=(
     mos
     obsidian
     ollama-app
-    docker-desktop
     screen-studio
-    proton-pass
     dunnkers/pinned/protonvpn-6-5-1
     orchard
+    crmne/tap/zapfast
+    signal
 )
 
 # Add third-party taps
 brew tap hashicorp/tap
 brew tap anomalyco/tap
-brew tap protonpass/tap
+brew tap crmne/tap
 # Proton VPN is pinned to 6.5.1: 6.5.2 fails to enable its system extension
 # on macOS 27 ("Cannot enable System Extension" / "VPN Protocol Not Supported").
 # Remove the pin (and casks/protonvpn-6-5-1.rb) once a fixed release ships.

@@ -12,7 +12,7 @@ This is a macOS laptop setup automation repository that installs and configures 
 
 The main entry point is [install.sh](install.sh), which executes scripts in this order:
 
-1. [install_brew.sh](install_brew.sh) - Installs all Homebrew packages and cask applications in one consolidated command. Always includes Proton VPN (pinned) and Proton Pass.
+1. [install_brew.sh](install_brew.sh) - Installs all Homebrew packages and cask applications in one consolidated command. Always includes Proton VPN (pinned).
    - [install_cf.sh](install_cf.sh) - Installs the Cloudflare CLI `cf` via npm (needs node from the brew step)
    - [install_container.sh](install_container.sh) - Starts Apple `container` as a login service (`brew services`), sets Orchard (GUI) to launch at login, and installs `mlx-lm` via `uv tool install` (Orchard looks for `~/.local/bin/mlx_lm.server`)
 2. [install_mas.sh](install_mas.sh) - Installs Mac App Store applications

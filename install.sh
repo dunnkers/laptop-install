@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Some casks (visual-studio-code, docker-desktop, …) run sudo partway through
+# Some casks (visual-studio-code, …) run sudo partway through
 # their install. Authorise once up front so the rest of the run is unattended.
 echo "Some installers need administrator rights — asking for your password once:"
 if sudo -v; then
@@ -23,6 +23,7 @@ sh install_mas.sh
 sh install_talat.sh
 sh install_dock.sh
 sh install_hotcorners.sh
+sh install_spaces.sh
 sh install_quickactions.sh
 sh install_hyperkey.sh
 sh install_maccy.sh

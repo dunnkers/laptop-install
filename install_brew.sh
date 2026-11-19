@@ -59,6 +59,7 @@ casks=(
     mos
     obsidian
     calibre
+    inkscape
     ollama-app
     docker-desktop
     screen-studio

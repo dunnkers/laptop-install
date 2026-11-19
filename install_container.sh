@@ -8,7 +8,12 @@ echo "Configuring container and Orchard..."
 if brew services list | grep -E '^container\s+started' >/dev/null 2>&1; then
     echo "container service already running."
 else
-    brew services start container
+    # A stale launchd registration makes `start` fail with "Bootstrap failed: 5";
+    # unload it and retry.
+    if ! brew services start container; then
+        launchctl bootout "gui/$(id -u)/sh.brew.container" 2>/dev/null || true
+        brew services restart container || echo "⚠ Could not start the container service."
+    fi
 fi
 
 # brew services doesn't install a kernel automatically

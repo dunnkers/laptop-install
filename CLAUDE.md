@@ -19,7 +19,7 @@ The main entry point is [install.sh](install.sh), which executes scripts in this
    - [install_talat.sh](install_talat.sh) - Installs talat from the official DMG (https://talat.app/download/mac); not on Homebrew or the App Store, Apple Silicon only
 3. Configuration scripts for specific applications:
    - [install_hotcorners.sh](install_hotcorners.sh)
-   - [install_hyperkey.sh](install_hyperkey.sh)
+   - [install_swiftbar.sh](install_swiftbar.sh) - Points SwiftBar at the plugin folder `~/.config/swiftbar` (menu bar scripts, e.g. a supertranscribe status plugin), launches it at login   - [install_hyperkey.sh](install_hyperkey.sh)
    - [install_rectangle.sh](install_rectangle.sh)
    - [install_linearmouse.sh](install_linearmouse.sh)
 

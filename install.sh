@@ -26,6 +26,7 @@ sh install_hotcorners.sh
 sh install_quickactions.sh
 sh install_hyperkey.sh
 sh install_maccy.sh
+sh install_swiftbar.sh
 sh install_rectangle.sh
 sh install_linearmouse.sh
 sh install_spotify.sh

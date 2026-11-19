@@ -9,4 +9,5 @@ if ! command -v npm >/dev/null 2>&1; then
 fi
 
 echo "Installing Cloudflare CLI (cf)..."
-npm install --global cf && echo "✓ Cloudflare CLI installation complete."
+# --allow-scripts=workerd: cf depends on workerd, whose postinstall npm otherwise skips
+npm install --global --allow-scripts=workerd cf && echo "✓ Cloudflare CLI installation complete."

@@ -9,7 +9,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Build list of packages to install
 packages=(
     gifski
-    gemini-cli
     node
     uv
     gh
@@ -26,6 +25,7 @@ packages=(
     anomalyco/tap/opencode
     himalaya
     cloudflare-wrangler
+    cloudflared
     rust
     rust-analyzer
     cmake
@@ -48,6 +48,7 @@ casks=(
     rectangle
     drawio
     claude-code
+    antigravity-cli
     claude
     craft
     dbeaver-community
@@ -57,12 +58,14 @@ casks=(
     linearmouse
     mos
     obsidian
+    calibre
     ollama-app
     docker-desktop
     screen-studio
     proton-pass
     dunnkers/pinned/protonvpn-6-5-1
     orchard
+    swiftbar
 )
 
 # Add third-party taps

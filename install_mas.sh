@@ -28,8 +28,12 @@ done
 echo "Checking for outdated apps…"
 outdated=$(mas outdated 2>/dev/null)
 
-# check for running apps
-running_apps=$(osascript -e 'tell application "System Events" to get name of every application process' 2>/dev/null)
+# An app is "running" if its main binary is; Safari extension helpers (.appex) don't count
+is_running() {
+    local path
+    path=$(mdfind "kMDItemAppStoreAdamID == $1" | head -1)
+    [ -n "$path" ] && pgrep -f "^$path/Contents/MacOS/" >/dev/null
+}
 
 echo "Upgrading apps…"
 for app in "${apps[@]}"; do
@@ -39,10 +43,7 @@ for app in "${apps[@]}"; do
         echo "  ✓ $name is up to date"
         continue
     fi
-    # strip suffixes like " - Ad Blocker" or " for Safari" to match process names
-    short_name="${name%% - *}"
-    short_name="${short_name%% for *}"
-    if echo "$running_apps" | grep -qi "$short_name"; then
+    if is_running "$id"; then
         echo "  ⚠ Skipping $name — currently running"
     else
         echo "  Upgrading $name ($id)…"
@@ -51,10 +52,10 @@ for app in "${apps[@]}"; do
         ( sleep 30 && kill $pid 2>/dev/null ) &
         timer=$!
         if wait $pid 2>/dev/null; then
-            kill $timer 2>/dev/null
+            { kill $timer; wait $timer; } 2>/dev/null
             echo "  ✓ $name done"
         else
-            kill $timer 2>/dev/null
+            { kill $timer; wait $timer; } 2>/dev/null
             echo "  ✗ $name failed or timed out"
         fi
     fi
